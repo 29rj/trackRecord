@@ -1,14 +1,16 @@
 const pool = require('../db/db');
 const bcrypt = require('bcryptjs');
-const {jwtTokens} = require('../helpers/validations');
+const {jwtTokens,validPassword} = require('../helpers/validations');
 
 
 const signupUser = async (req, res) => {
 
-    //validations od password and username
-
     try {
         const { username, name, mobile_no, password } = req.body;
+
+        if(!validPassword(password)){
+            return res.send("Password should contain at least 1 Number,1 UpperCase, 1 LowerCase and 1Special Character !!!");
+        }
 
         const hashPassword = bcrypt.hashSync(password,10);
 
@@ -22,6 +24,8 @@ const signupUser = async (req, res) => {
             pool.query('DELECT FROM users WHERE username=$1',[username]);
             return res.send(501).send("Cannot be inserted");
         }
+
+        delete createUserQuery.rows[0].password;
 
         const successMessage = {
             status:"Successfully Opened Account with 0 balance!!!",
@@ -37,8 +41,6 @@ const signupUser = async (req, res) => {
 }
 
 const signinUser = async (req, res) => {
-
-    //validations of password and email
 
     try {
         const { username,password } = req.body;

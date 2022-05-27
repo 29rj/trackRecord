@@ -20,7 +20,31 @@ const validateAmount = (amount) => {
     return true;
 }
 
+const validPassword = (password) => {
+    let cap=false,small=false,sp=false,num=false;
+
+    for(let i=0;i<password.length;i++){
+
+        if(password[i] >= 'a' && password[i] <='z'){
+            small = true;
+        }else if(password[i] >= 'A' && password[i] <='Z'){
+            cap = true;
+        }else if(password[i] >= '0' && password[i] <='9'){
+            num = true;
+        }else{
+            sp = true;
+        }
+    }
+
+    console.log(small,cap,num,sp);
+    if(cap && small && num && sp){
+        return true;
+    }
+    return false;
+}
+
 module.exports = {
     jwtTokens,
-    validateAmount
+    validateAmount,
+    validPassword
 }
