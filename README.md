@@ -32,4 +32,11 @@ a) During signup, if username already exist then it will not register again.<br>
 b) During password entering,it should contain at least 1 special character,1 number,1 capital letter, 1 small letter.<br>
 c) Duirng any CRUD operations, <b>token validation</b> is passed as a <b>middleware</b> before any operations.<br>
 d) During credit and debit operations, amount entered by the user is valid or not is also being handled.<br>
-e) And many other small cases is being handled.
+e) And many other small cases is being handled.<br>
+
+## Tables Structure:
+a) User's Table:<br>
+![image](https://user-images.githubusercontent.com/70429608/170790248-796bbe27-f6eb-4d46-9a23-44c599b675a4.png)
+<br>
+b) Transaction's Table:<br>
+![image](https://user-images.githubusercontent.com/70429608/170790351-bad709cf-5f0c-44df-bc4e-c67f63e5f429.png)
