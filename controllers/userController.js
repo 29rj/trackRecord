@@ -1,6 +1,6 @@
 const pool = require('../db/db');
 const bcrypt = require('bcryptjs');
-const jwtTokens = require('../helpers/validations');
+const {jwtTokens} = require('../helpers/validations');
 
 
 const signupUser = async (req, res) => {
@@ -60,7 +60,7 @@ const signinUser = async (req, res) => {
         }
 
         //sign the tokens using username an mobile_no
-        const token = jwtTokens(currUser.username,currUser.mobile_no);
+        const token = jwtTokens(currUser.username);
 
         // console.log(token);
         const successMessage = {

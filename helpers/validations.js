@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-function jwtTokens(username,mobile_no) {
+const jwtTokens = (username) => {
     const user = {
     "username":username
     };
@@ -13,6 +13,7 @@ function jwtTokens(username,mobile_no) {
 }
 
 const validateAmount = (amount) => {
+
     if(amount < 0 || isNaN(amount)){
         return false;
     }
