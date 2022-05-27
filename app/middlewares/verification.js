@@ -10,14 +10,15 @@ function verificationToken(req,res,next){
 
     if(token == null) return res.status(401).json({error:"NULL TOKEN"});
 
-    const decoded = jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
+    // const decoded = jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
+    // req.username  = decoded.username;
 
-    // console.log(decoded.username);
-
-    req.username  = decoded.username;
-
-    next();
-
+    jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(error,decoded) => {
+        if(error)  return res.status(401).json({error:error.message});
+        req.username = decoded.username;
+        console.log(req.username);
+        next();
+    })
 }
 
 module.exports = {verificationToken};

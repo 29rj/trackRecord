@@ -9,7 +9,7 @@ const signupUser = async (req, res) => {
         const { username, name, mobile_no, password } = req.body;
 
         if(!validPassword(password)){
-            return res.send("Password should contain at least 1 Number,1 UpperCase, 1 LowerCase and 1Special Character !!!");
+            return res.send("Password should contain at least 1 Number,1 UpperCase, 1 LowerCase and 1 Special Character !!!");
         }
 
         const hashPassword = bcrypt.hashSync(password,10);

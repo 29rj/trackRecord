@@ -33,11 +33,13 @@ const view = async (req,res) => {
 
 const credit = async (req,res) => {
     try{
-        const {amt} = req.body;
+        let {amt} = req.body;
          //validate amount
          if(!validateAmount(amt)){
             return res.send("Enter valid amount!!");
         }
+
+        amt = parseInt(amt);
 
         const username = req.username;
       
@@ -60,13 +62,15 @@ const credit = async (req,res) => {
 
 const debit = async (req,res) => {
     try{
-        const {amt} = req.body;
+        let {amt} = req.body;
         console.log(amt);
         
         //validate amount
         if(!validateAmount(amt)){
             return res.send("Enter valid amount!!");
         }
+
+        amt = parseInt(amt);
 
         const username = req.username;
 
