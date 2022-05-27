@@ -26,3 +26,10 @@ c) <b>/transactions/view:</b> (GET Request) It is used to view all the details o
 
 d) <b>/transactions/credit:</b>(POST Request) It is used to add amount to the curr_balance by taking input from the user and display the acknowledgement to the user.<br><br>
 e) <b>/transactions/debit:</b> (POST Request) It is used to deduct amount from the curr_balance by taking input from the user and display the acknowledgement to the user.<br><br>
+
+## Important Validations Handled:
+a) During signup, if username already exist then it will not register again.<br>
+b) During password entering,it should contain at least 1 special character,1 number,1 capital letter, 1 small letter.<br>
+c) Duirng any CRUD operations, <b>token validation</b> is passed as a <b>middleware</b> before any operations.<br>
+d) During credit and debit operations, amount entered by the user is valid or not is also being handled.<br>
+e) And many other small cases is being handled.
