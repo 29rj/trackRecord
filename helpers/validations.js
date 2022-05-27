@@ -12,4 +12,14 @@ function jwtTokens(username,mobile_no) {
     return accessToken;
 }
 
-module.exports = jwtTokens;
+const validateAmount = (amount) => {
+    if(amount < 0 || isNaN(amount)){
+        return false;
+    }
+    return true;
+}
+
+module.exports = {
+    jwtTokens,
+    validateAmount
+}

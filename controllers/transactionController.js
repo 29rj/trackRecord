@@ -1,11 +1,9 @@
 const pool = require('../db/db');
-
+const {validateAmount} = require('../helpers/validations');
 
 const view = async (req,res) => {
     try{
         const username = req.username;
-
-        console.log(username);
 
         const fetchViewQuery = await pool.query('SELECT * from transactions WHERE id=$1',[username]);
         
@@ -16,8 +14,6 @@ const view = async (req,res) => {
         const fetchDetailQuery = await pool.query('SELECT * from users WHERE username=$1',[username]);
 
         const currUser = fetchDetailQuery.rows[0];
-
-        // console.log(currUser);
 
         const msg = {
             status:"success",
@@ -38,9 +34,13 @@ const view = async (req,res) => {
 const credit = async (req,res) => {
     try{
         const {amt} = req.body;
-        const username = req.username;
-        console.log(username);
+         //validate amount
+         if(!validateAmount(amt)){
+            return res.send("Enter valid amount!!");
+        }
 
+        const username = req.username;
+      
         const updateQuery = await pool.query('UPDATE transactions SET curr_bal=curr_bal+$1 WHERE id=$2  returning *',[amt,username]);
 
         if(updateQuery.rowCount == 0){
@@ -61,18 +61,20 @@ const credit = async (req,res) => {
 const debit = async (req,res) => {
     try{
         const {amt} = req.body;
+        console.log(amt);
+        
+        //validate amount
+        if(!validateAmount(amt)){
+            return res.send("Enter valid amount!!");
+        }
 
         const username = req.username;
-
-        // console.log(username);
 
         let curr_bal = await pool.query('SELECT curr_bal FROM transactions WHERE id=$1',[username]);
         
         curr_bal = curr_bal.rows[0].curr_bal;
 
-        const left = parseInt(curr_bal)-parseInt(amt);
-
-        // console.log(left);
+        const left = curr_bal-amt;
 
         if(left<0){
             return res.send(`You cannot fetch ${amt} as your available balance is only ${curr_bal}`);
