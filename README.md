@@ -34,7 +34,7 @@ c) Duirng any CRUD operations, <b>token validation</b> is passed as a <b>middlew
 d) During credit and debit operations, amount entered by the user is valid or not is also being handled.<br>
 e) And many other small cases is being handled.<br>
 
-## Tables Structure:
+## Table Structures:
 a) User's Table:<br>
 ![image](https://user-images.githubusercontent.com/70429608/170790248-796bbe27-f6eb-4d46-9a23-44c599b675a4.png)
 <br>
